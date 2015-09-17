@@ -124,6 +124,12 @@ func (md *MobileDetect) SetHttpHeaders(httpHeaders map[string]string) *MobileDet
 	return md
 }
 
+func (md *MobileDetect) SetRequest(req *http.Request) *MobileDetect {
+	md.userAgent = req.UserAgent()
+	md.httpHeaders = getHttpHeaders(req)
+	return md
+}
+
 // IsMobile is a specific case to detect only mobile browsers.
 func (md *MobileDetect) IsMobile() bool {
 	if md.CheckHttpHeadersForMobile() {
